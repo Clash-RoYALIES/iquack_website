@@ -208,7 +208,7 @@
       font-size: 1.5rem;
     }
     #impact .impact-points .point p {
-      font-size: 1rem;
+      font-size: 0.75rem;
       line-height: 1.5;
     }
     
@@ -244,8 +244,8 @@
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
+  <!-- Navigation
+  <nav class="desktop-only"></nav>
     <div class="container">
       <ul>
         <li><a href="#overview" onclick="scrollToSection('overview')">Overview</a></li>
@@ -256,6 +256,19 @@
       </ul>
     </div>
   </nav>
+  <style>
+    @media (max-width: 4000px)
+    {
+      .desktop-only {
+        display: block;
+      }
+    }
+    @media (max-width: 768px) {
+      .desktop-only {
+        display: none;
+      }
+    }
+  </style> -->
   
   <!-- Hero Section -->
   <header style="margin-bottom: 10px;">
