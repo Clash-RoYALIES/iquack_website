@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quantum TransitOpt: D-Wave for Multi-Modal Transportation Optimization</title>
+  <!-- Google Fonts for enhanced typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #f0a500;
+      --secondary-color: #27ae60;
+      --dark-color: #2c3e50;
+      --light-color: #f9f9f9;
+    }
+    
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      color: #fff;
+      background: var(--light-color);
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    ul {
+      list-style: none;
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 0;
+      z-index: 1000;
+    }
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul {
+      display: flex;
+    }
+    nav li {
+      margin: 0 15px;
+    }
+    nav a {
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--primary-color);
+    }
+    
+    /* Hero Section */
+    header {
+      height: 100vh;
+      position: relative;
+      background: url('https://www.transdev.com/wp-content/uploads/2024/03/vehicule-flybus-et-avion.jpg') center/cover no-repeat;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      padding: 20px;
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+    .hero-content .btn {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero-content .btn:hover {
+      background: #cf8500;
+    }
+    
+    /* Background Sections (Overview, Challenge, Quantum, Results, Contact) */
+    .bg-section {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .bg-section::before {
+      content: "";
+      position: absolute;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+    .content-container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 5px;
+    }
+    .bg-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-top: 20px;
+    }
+    
+    /* Impact Section – Original Format (No background image) */
+    #impact {
+      background: #fff;
+      color: var(--dark-color);
+      padding: 100px 20px;
+      text-align: center;
+    }
+    #impact .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    #impact .section-title {
+      color: var(--dark-color);
+    }
+    #impact p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    #impact .impact-points {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    #impact .impact-points .point {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      flex: 1 1 250px;
+      max-width: 300px;
+      text-align: center;
+    }
+    #impact .impact-points .point h3 {
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+    #impact .impact-points .point p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    
+    /* Appear on Scroll Animation */
+    .hidden {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .bg-section {
+        padding: 60px 20px;
+      }
+      #impact .impact-points {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="#overview" onclick="scrollToSection('overview')">Overview</a></li>
+        <li><a href="#challenge" onclick="scrollToSection('challenge')">The Challenge</a></li>
+        <li><a href="#quantum" onclick="scrollToSection('quantum')">Quantum Solution</a></li>
+        <li><a href="#impact" onclick="scrollToSection('impact')">Community Impact</a></li>
+        <li><a href="#results" onclick="scrollToSection('results')">Results</a></li>
+        <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <header style="margin-bottom: 10px;">
+    <div class="hero-content hidden">
+      <h1>Quantum TransitOpt</h1>
+      <p>
+        Harnessing D-Wave Quantum Computing to Optimize Multi-Modal Transportation — Minimizing wait times and travel distances for seamless airport transfers.
+      </p>
+      <button class="btn" onclick="scrollToSection('overview')">Discover More</button>
+    </div>
+  </header>
+  
+  <!-- Overview Section -->
+  <section id="overview" class="bg-section hidden" style="margin-bottom: 10px; background-image: url('https://www.massport.com/sites/default/files/styles/max_1920x540/public/2023-09/BlueLine-Hero.png?itok=cZw-eVov');">
+    <div class="content-container">
+      <h2 class="section-title">Project Overview</h2>
+      <p>
+        Quantum TransitOpt is a pioneering initiative leveraging D-Wave’s quantum computing to revolutionize multi-modal transportation.
+        Our mission is to optimize transit schedules and routes — ensuring that the time between airport arrivals and subsequent ground transport is minimized,
+        thereby reducing overall travel time and improving passenger experiences.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Challenge Section -->
+  <section id="challenge" class="bg-section hidden" style="margin-bottom: 10px; background-image: url('https://img.atlasobscura.com/NcFfjwGzsDl9OGWqUeRE3VYMTCDaU_Q7PLNl4eEyoTo/rs:fill:12000:12000/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy8zOGViYTQyMjg5/NzE1NzQwMTBfYnVz/LXN0b3AtNzIxNzFf/OTYwXzcyMC5qcGc.jpg');">
+    <div class="content-container">
+      <h2 class="section-title">The Challenge</h2>
+      <p>
+        Traditional transportation systems often struggle with coordination between air and ground services.
+        Unpredictable traffic, inefficient scheduling, and misaligned transit times can lead to long wait periods and increased travel distances.
+        In today’s fast-paced world, seamless airport transfers are essential to meet the needs of modern travelers.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Quantum Solution Section -->
+  <section id="quantum" class="bg-section hidden" style="margin-bottom: 10px; background-color: rgb(144, 207, 200);">
+    <div class="content-container">
+      <h2 class="section-title">Our Quantum Solution</h2>
+      <p>
+        By harnessing the unprecedented processing power of D-Wave’s quantum annealing,
+        we analyze vast datasets and complex scheduling algorithms in real time.
+        This enables us to precisely optimize the coordination between arriving flights and connecting bus services,
+        reducing idle times and optimizing travel distances for a more efficient, seamless transit experience.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Community Impact Section (Original Format, No Background Image) -->
+  <section id="impact" class="hidden" style="margin-bottom: 10px;">
+    <div class="container">
+      <h2 class="section-title">Community Impact</h2>
+      <p>
+        Our solution is designed not only to enhance transportation efficiency but also to make a lasting, positive impact on travelers and local communities.
+        By streamlining airport transfers and reducing wait times, we improve connectivity, boost local economic activity, and promote sustainable urban mobility.
+      </p>
+      <div class="impact-points">
+        <div class="point">
+          <h3>Improved Connectivity</h3>
+          <p>Optimized transit routes and schedules ensure faster, more reliable airport transfers.</p>
+        </div>
+        <div class="point">
+          <h3>Sustainability</h3>
+          <p>Efficient scheduling reduces fuel consumption and emissions, supporting greener travel.</p>
+        </div>
+        <div class="point">
+          <h3>Innovation</h3>
+          <p>Quantum computing unlocks breakthrough strategies for modern, integrated transportation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Preliminary Results Section -->
+  <section id="results" class="bg-section hidden" style="margin-bottom: 10px; background-color: #caa051;">
+    <div class="content-container">
+      <h2 class="section-title">Preliminary Results</h2>
+      <p>
+        Early testing shows promising improvements in scheduling accuracy, reduced wait times, and optimized transit routes.
+        Our data-driven approach lays the foundation for a quantum-powered revolution in multi-modal transportation.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="bg-section hidden" style="background-color: beige;">
+    <div class="content-container">
+      <h2 class="section-title">Contact Us</h2>
+      <p>
+        Get in touch with us to learn more about Quantum TransitOpt or to discuss collaboration opportunities.
+      </p>
+      <form id="contact-form" action="/contact" method="post" style="margin-top: 30px; text-align: left;">
+        <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 6px;">
+        <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 6px;">
+        <textarea name="message" rows="5" placeholder="Your Message" required style="width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 6px;"></textarea>
+        <button type="submit" style="background: var(--secondary-color); color: #fff; padding: 15px 30px; border: none; border-radius: 30px; font-size: 1.1rem; cursor: pointer;">
+          Send Message
+        </button>
+      </form>
+      <div id="form-status" style="margin-top: 20px;"></div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Quantum TransitOpt. All rights reserved.</p>
+  </footer>
+  
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('appear');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+    
+    // AJAX contact form submission
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formStatus = document.getElementById('form-status');
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+      fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        formStatus.innerText = result.message;
+        this.reset();
+      })
+      .catch(err => {
+        formStatus.innerText = 'An error occurred. Please try again later.';
+        console.error('Form submission error:', err);
+      });
+    });
+  </script>
+</body>
+</html>
