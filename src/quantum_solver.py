@@ -1,6 +1,9 @@
 from dimod import ConstrainedQuadraticModel, Binary
 from dwave.system import LeapHybridCQMSampler
 from problem_dimensions import N, T, alpha, flow, d
+import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
 
 cqm = ConstrainedQuadraticModel()
 
@@ -82,3 +85,81 @@ if len(feasible_solutions):
 
 else:
     print("No feasible solution found.")
+
+
+assignments = {}
+for t in range(T):
+    assignments[t] = {}
+    for j in range(N):
+        for m in range(N):
+            if best_solution[f'x_{j}_{m}_{t}'] == 1:
+                assignments[t][j] = m
+
+flow_cost_per_month = [0] * T
+for t in range(T):
+    for j in range(N):
+        for k in range(N):
+            for m in range(N):
+                for n in range(N):
+                    flow_cost_per_month[t] += flow[t][j][k] * d[m][n] * best_solution[f'x_{j}_{m}_{t}'] * best_solution[f'x_{k}_{n}_{t}']
+
+move_cost_per_month = [0] * (T - 1)
+for t in range(T-1):
+    for j in range(N):
+        for m in range(N):
+            for n in range(N):
+                move_cost_per_month[t] += alpha * d[m][n] * best_solution[f'x_{j}_{m}_{t}'] * best_solution[f'x_{j}_{n}_{t+1}']
+
+colors = plt.cm.get_cmap('tab20', N).colors
+
+plt.figure(figsize=(14, 10))
+
+# Plot 1: Facility locations over time with movement paths
+plt.subplot(2, 1, 1)
+for j in range(N):
+    x = list(range(T))
+    y = [assignments[t][j] for t in range(T)]
+    plt.plot(x, y, marker='o', linestyle='-', color=colors[j], label=f'Facility {j}')
+
+for t in range(T-1):
+    plt.annotate(f'{move_cost_per_month[t]:.0f}', 
+                 xy=(t+0.5, (N-1)*1.05), 
+                 ha='center', va='bottom',
+                 fontsize=8, color='red')
+
+plt.title('Facility Locations and Movement Paths Over Time')
+plt.xlabel('Time Step')
+plt.ylabel('Location')
+plt.xticks(range(T))
+plt.yticks(range(N))
+plt.grid(True)
+plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left')
+
+# Plot 2: Cost breakdown
+plt.subplot(2, 1, 2)
+x_flow = np.arange(T)
+x_move = np.arange(T-1) + 0.4  # Offset for dual bars
+
+bars_flow = plt.bar(x_flow - 0.2, flow_cost_per_month, width=0.4, 
+                   label='Flow Cost', color='blue')
+
+bars_move = plt.bar(x_move, move_cost_per_month, width=0.4,
+                   label='Movement Cost', color='orange')
+
+for bar in bars_flow + bars_move:
+    height = bar.get_height()
+    plt.annotate(f'{height:.0f}',
+                 xy=(bar.get_x() + bar.get_width()/2, height),
+                 xytext=(0, 3), textcoords='offset points',
+                 ha='center', va='bottom', fontsize=8)
+
+plt.title('Monthly Cost Breakdown')
+plt.xlabel('Time Step')
+plt.ylabel('Cost')
+plt.xticks(list(x_flow) + list(x_move+0.2),
+          [f'T{t}' for t in range(T)] + [f'T{t}-T{t+1}' for t in range(T-1)])
+plt.legend()
+plt.grid(True, axis='y')
+
+plt.tight_layout()
+plt.show()
