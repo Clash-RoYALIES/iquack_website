@@ -1,21 +1,16 @@
-# Simple workflow for deploying static content from iquack_frontend to GitHub Pages
-name: Deploy static content to Pages
+# Deploys only the iquack_frontend subdirectory to GitHub Pages
+name: Deploy iquack_frontend to GitHub Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -33,11 +28,14 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload Artifact (Only iquack_frontend)
+      - name: Move Files to Root for Deployment
+        run: |
+          mv iquack_frontend public
+
+      - name: Upload Only iquack_frontend Contents
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload only the iquack_frontend directory
-          path: "iquack_frontend"
+          path: "public"
 
       - name: Deploy to GitHub Pages
         id: deployment
