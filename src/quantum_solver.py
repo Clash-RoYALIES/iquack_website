@@ -134,32 +134,4 @@ plt.xticks(range(T))
 plt.yticks(range(N))
 plt.grid(True)
 plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left')
-
-# Plot 2: Cost breakdown
-plt.subplot(2, 1, 2)
-x_flow = np.arange(T)
-x_move = np.arange(T-1) + 0.4  # Offset for dual bars
-
-bars_flow = plt.bar(x_flow - 0.2, flow_cost_per_month, width=0.4, 
-                   label='Flow Cost', color='blue')
-
-bars_move = plt.bar(x_move, move_cost_per_month, width=0.4,
-                   label='Movement Cost', color='orange')
-
-for bar in bars_flow + bars_move:
-    height = bar.get_height()
-    plt.annotate(f'{height:.0f}',
-                 xy=(bar.get_x() + bar.get_width()/2, height),
-                 xytext=(0, 3), textcoords='offset points',
-                 ha='center', va='bottom', fontsize=8)
-
-plt.title('Monthly Cost Breakdown')
-plt.xlabel('Time Step')
-plt.ylabel('Cost')
-plt.xticks(list(x_flow) + list(x_move+0.2),
-          [f'T{t}' for t in range(T)] + [f'T{t}-T{t+1}' for t in range(T-1)])
-plt.legend()
-plt.grid(True, axis='y')
-
-plt.tight_layout()
 plt.show()
