@@ -1,0 +1,69 @@
+N = 1:
+    quantum: 4.73s          | cost 0
+    brute force: 0.012s     | cost 0
+N = 2:
+    quantum: 10.437s        | cost 13104
+    brute force: 0.010s     | cost 13116
+N = 3:
+    quantum: 10.1s          | cost 18952
+    brute force: 0.014s     | cost 18973
+N = 4:
+    quantum: 10.441s        | cost 36869
+    brute force: 0.014s     | cost 36877
+N = 5:
+    quantum: 11.107s        | cost 358964
+    brute force: 0.034s     | cost 359071
+N = 6:
+    quantum: 11.797s        | cost 755738
+    brute force: 0.053s     | cost 755910
+N = 7:
+    quantum: 12.236s        | cost 787708
+    brute force: 0.31s      | cost 767553
+N = 8:
+    quantum: 10.429s        | cost 1544229
+    brute force: 2.784s     | cost 1533867
+N = 9:
+    quantum: 12.186s        | cost 1524865
+    brute force: 27.041s    | cost 1514367
+N = 10:
+    quantum: 12.227s        | cost 2544110
+    brute force: 5m18.764s  | cost 2519434
+N = 11:
+    quantum: 15.064s        | cost 2380622
+    brute force: 77m        | cost ???
+N = 12:
+    quantum: 21.87s         | cost 3537802
+    brute force: ???        | cost ???
+N = 13:
+    quantum: 22.802s        | cost 4132007
+    brute force: ???        | cost ???
+N = 14:
+    quantum: 27.515s        | cost 3684782
+    brute force: ???        | cost ???
+N = 15:
+    quantum: 29.05          | cost 5067441
+    brute force: ???        | cost ???
+N = 16:
+    quantum: 40.34s         | cost 6377463
+    brute force: ???        | cost ???
+N = 17:
+    quantum: 40.597s        | cost 7137529
+    brute force: ???        | cost ???
+N = 18:
+    quantum: 45.55s         | cost 7462301
+    brute force: ???        | cost ???
+N = 19:
+    quantum: 54.75s         | cost 9281184
+    brute force: ???        | cost ???
+N = 20:
+    quantum: 1m5.377s       | cost 9273952
+    brute force: ???        | cost ???
+N = 30:
+    quantum: 8m5.291s       | cost 23585365
+    brute force: ???        | cost ???
+N = 40:
+    quantum: 18m12.624s     | cost 41112848
+    brute force: ???        | cost ???
+N = 50:
+    quantum: 42m5.18s       | cost 64035465
+    brute force: ???        | cost ???
