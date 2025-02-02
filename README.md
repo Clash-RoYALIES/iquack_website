@@ -6,9 +6,9 @@ Given NxN flow and distance matrices with time dependence, we implement two algo
 
 Our approach relies on converting QAP into a quadratic unconstrained binary optimization problem that can be modeled by the Ising Model. This ensures scalability if we wish to transition to fully quantum hardware. We compute the objective function by summing the costs and using it as our Hamiltonian energy function, which the quantum computer should minimize.
 
-<img src="https://github.com/user-attachments/assets/48d3cf93-1b84-48a3-9d4a-8f425746d477" width="800px">
+<img src="https://github.com/user-attachments/assets/48d3cf93-1b84-48a3-9d4a-8f425746d477" width="600px">
 <br><br>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://github.com/user-attachments/assets/d4344530-f4e6-48a1-bb52-5c8b16eb1114" width="650px">
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://github.com/user-attachments/assets/d4344530-f4e6-48a1-bb52-5c8b16eb1114" width="450px">
 <br><br>
 <img src="https://cdn.discordapp.com/attachments/1306438341385781281/1335452121050513490/image.png?ex=67a03835&is=679ee6b5&hm=dad4c8aafd89d63d8adb1ebc2a1c4928b791ae07de90327395385d03eb57f584&" width="600px">
 
