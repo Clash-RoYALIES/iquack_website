@@ -28,14 +28,15 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Move Files to Root for Deployment
+      - name: Move iquack_frontend to Root for Deployment
         run: |
-          mv iquack_frontend public
+          mkdir deployment
+          mv iquack_frontend/* deployment/
 
       - name: Upload Only iquack_frontend Contents
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "public"
+          path: "deployment"
 
       - name: Deploy to GitHub Pages
         id: deployment
