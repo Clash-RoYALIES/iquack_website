@@ -6,14 +6,18 @@ Given NxN flow and distance matrices with time dependence, we implement two algo
 
 Our approach relies on converting QAP into a quadratic unconstrained binary optimization problem that can be modeled by the Ising Model. This ensures scalability if we wish to transition to fully quantum hardware. We compute the objective function by summing the costs and using it as our Hamiltonian energy function, which the quantum computer should minimize.
 
-<img src="https://github.com/user-attachments/assets/48d3cf93-1b84-48a3-9d4a-8f425746d477" width="800px">
+<img src="https://github.com/user-attachments/assets/48d3cf93-1b84-48a3-9d4a-8f425746d477" width="600px">
 <br><br>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://github.com/user-attachments/assets/d4344530-f4e6-48a1-bb52-5c8b16eb1114" width="650px">
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://github.com/user-attachments/assets/d4344530-f4e6-48a1-bb52-5c8b16eb1114" width="450px">
 <br><br>
-<img src="https://cdn.discordapp.com/attachments/1306438341385781281/1335452121050513490/image.png?ex=67a03835&is=679ee6b5&hm=dad4c8aafd89d63d8adb1ebc2a1c4928b791ae07de90327395385d03eb57f584&" width="800px">
+<img src="https://cdn.discordapp.com/attachments/1306438341385781281/1335452121050513490/image.png?ex=67a03835&is=679ee6b5&hm=dad4c8aafd89d63d8adb1ebc2a1c4928b791ae07de90327395385d03eb57f584&" width="600px">
 
 Example data mapping the TD-QAP problem to the seasonal allocation of flight/air train/bus allocation in airports based on popular destinations:
 
 <img src="https://github.com/user-attachments/assets/0ee83cbd-b56a-4905-a0a1-ab27f32a0d8d" width="1200px">
 
-The quantum algorithm has been shown to work with 99% accuracy for values of N < 10 when compared to the brute force algorithm, and its costs remain reasonable as N scales up. Thus, we can make comparisons with various slightly inaccurate classical heuristics, but since quantum computing still has a long way to go and this result was achieved with the number of qubits in the hundreds, the technology is extremely promising.
+The quantum algorithm has been shown to work with >99% accuracy for values of N < 10 when compared to the brute force algorithm, and its costs remain reasonable as N scales up. In the graph below, 1.00 is the accuracy of the brute force algorithm.
+
+<img src="https://cdn.discordapp.com/attachments/1306438341385781281/1335564340803403786/image.png?ex=67a0a0b8&is=679f4f38&hm=37fff55749e37b069c61a2d5f54d8ebf6b3e96c708715968b746e4c4214e28ab&" style="width:600px">
+
+We can see some fluctuations due to random errors, but the effect on the accuracy is negligible. Furthermore, if we wanted to improve these results, we could run for a given N a number of times and average out the errors. Thus, we can make comparisons with various slightly inaccurate classical heuristics, but since quantum computing still has a long way to go and this result was achieved with the number of qubits only in the hundreds, the technology is extremely promising.
