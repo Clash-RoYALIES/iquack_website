@@ -1,4 +1,4 @@
-# Time-Dependent Quadratic Alignment Problem (TD-QAP)
+# Time-Dependent Quadratic Alignment Problem (TD-QAP) - iQuHack 2025, First Place Winner for D-Wave Challenge
 
 Given NxN flow and distance matrices with time dependence, we implement two algorithms to solve the time-dependent quadratic alignment problem:
 1. A classical computing, brute-force approach: Perfect accuracy is guaranteed but will only reliably finish for N <= 12. To show how quickly it scales, our data predicts the algorithm will take 70 minutes for N = 11, and the age of the universe for N = 21.
